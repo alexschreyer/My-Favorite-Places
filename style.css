@@ -1,0 +1,47 @@
+body,input,select,textarea {margin:0;padding:0;font-family: 'OFL Sorts Mill Goudy TT', arial, sans-serif;font-size:18px;}
+body {background:#fafafa url(back.jpg) top center no-repeat; }
+h1,h2,p {margin:0;padding:0;}
+h1 {font-size:2.8em;color:#881c1c}
+h1 a {text-decoration:none;}
+p {font-weight:bold;}
+a, a:visited, a:active {color:#881c1c}
+input,select,textarea {margin:10px 0 15px 0;padding:0;font-weight:bold;}
+input.button {padding:0 4px;}
+#wrap {width:900px;padding:10px;margin:Auto;background-color:#ece9d4;-webkit-box-shadow:0 0 40px rgba(0,0,0,.8);-moz-box-shadow:0 0 40px rgba(0,0,0,.8);box-shadow:0 0 40px rgba(0,0,0,.8);border-radius: 0 0 20px 20px;-moz-border-radius-bottomright: 20px;-moz-border-radius-bottomleft: 20px;-webkit-border-bottom-left-radius: 20px;-webkit-border-bottom-right-radius: 20px;}
+#topbanner {height:25px;-webkit-box-shadow:0 0 10px rgba(0,0,0,.8);-moz-box-shadow:0 0 10px rgba(0,0,0,.8);box-shadow:0 0 10px rgba(0,0,0,.8);}
+#topbanner input {margin:0;padding:0;}
+#leftpanel {float:left;padding:10px;width:420px;overflow:hidden;}
+#rightpanel {float:right;padding:10px;width:430px;overflow:hidden;}
+#mapCanvas {width:100%;height:500px;border:1px solid #beb395;margin-top:10px;font-family:Arial,Helvetica,sans-serif;font-size:12px;}
+#mapCanvas img[src^="http://umass"] {opacity:0.4;filter:alpha(opacity=40);-moz-opacity:0.4;-khtml-opacity:0.4;}
+table {background-color:#fff;font-family: arial, sans-serif;font-size:0.8em;padding:10px;margin:10px 0;}
+td {border-bottom:1px solid #333;padding:5px;}
+td {vertical-align: top;font-weight: normal;}
+#bottompanel {clear:both;float:none;margin-top:10px;padding:10px;text-align:right;}
+#description {width:100%;height:100px;}
+#infopanel {display:none;}
+ul#cycle {height:80px;margin-top:10px;padding:10px;background-color:#fafafa;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;overflow:auto;}
+ul#cycle li {font-size:0.9em;list-style:none;display:block;margin:0;padding:0;}
+ul#cycle li span.name {font-size:1.2em;font-weight:bold;}
+ul#cycle li span.text {margin:10px 20px;}
+#footer {width:900px; margin:20px Auto;font-family: arial, sans-serif;font-size:14px;line-height: 1.2em;font-weight: normal !important;}
+
+/*------- IPHONE CSS ONLY -------------*/
+@media screen and (max-width: 480px){
+
+	body {background:#fafafa;background-image:none;font-size:16px;}
+  #topbanner,#topbanner div,#wrap,#leftpanel,#rightpanel,#bottompanel,#footer {clear:both!important;display:block!important;width:90%!important;float:none!important;margin:0!important;padding:0!important;}
+	#leftpanel,#rightpanel,#bottompanel, #topbanner,#topbanner div {width:100%!important;}
+  #bottompanel {text-align:center;font-weight:bold;margin-top:10px!important;}
+	#wrap input,select,textarea {width:97%; font-size:1em;padding:2px;}
+  #wrap {padding:5% !important;-webkit-box-shadow:0 0 0 rgba(0,0,0,.8);-moz-box-shadow:0 0 0 rgba(0,0,0,.8);box-shadow:0 0 0 rgba(0,0,0,.8);-moz-border-radius-bottomright: 0;-moz-border-radius-bottomleft: 0;-webkit-border-bottom-left-radius: 0;-webkit-border-bottom-right-radius: 0;}
+  h1 {font-size:1.8em;line-height:1.2em;margin-bottom:5px;}
+  #topbanner {height:Auto;-webkit-box-shadow:0 0 0 rgba(0,0,0,.8);-moz-box-shadow:0 0 0 rgba(0,0,0,.8);box-shadow:0 0 0 rgba(0,0,0,.8);}
+  #description {width:97%;}
+  #mapCanvas {width:99% !important;height:300px !important;margin-bottom:15px;}
+  #infopanel {display:none !important;}
+  #footer {padding:10px !important;}
+	input.button {height:2.5em;}
+	input.highlight {background-color:#881c1c;color:#fff;}
+
+} /*------- IPHONE CSS ONLY -------------*/
