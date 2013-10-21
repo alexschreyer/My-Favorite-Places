@@ -24,3 +24,4 @@ TODO:
 - Move all images to img folder
 - Move JS and CSS into subfolders
 - Double-check db security provisions
+- One-click deletion of reported points from email
