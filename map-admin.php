@@ -109,7 +109,7 @@
       <div id="mapCanvas" style="width:100%;height:500px;">Loading map... be patient...</div>
       
       <p><br />
-       View as a <a href="list-admin.php">table</a> | Download entire data set: <a href="getkml.php" target="_blank">KML</a>
+       View as a <a href="list-admin.php">table</a> | Download entire data set: <a href="getkml.php" target="_blank">KML</a> or <a href="dbdump.php" target="_blank">SQL</a>
       </p>
 
       <div id="bottompanel">

@@ -3,8 +3,8 @@
 
 include_once 'config.php';
 
-if (isset($_POST['submit'])) {
-//This code runs if the form has been submitted
+if (isset($_POST['submit']) and ($_SERVER['HTTP_REFERER'] == APP_URL.'submit.php')) {
+//This code runs only if the form has been submitted from this server
 
     //  Filter out some addresses if needed
     //  if (strpos($_SERVER['REMOTE_ADDR'],'128.119') !== false) or (strpos($_SERVER['REMOTE_ADDR'],'72.19') !== false) {

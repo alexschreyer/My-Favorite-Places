@@ -2,7 +2,7 @@
 
 /*
 
-Edit configuration for this app below
+Edit configuration parameters for this app below
 
 */
 
@@ -10,7 +10,7 @@ Edit configuration for this app below
 define("APP_NAME",      "Our Favorite Places");
 define("APP_DESC",      "A description goes here for the meta tag and for the home page.");
 define("ADMIN_EMAILS",  "me@here.com");
-define("APP_URL",       "");
+define("APP_URL",       "http://localhost/My-Favorite-Places/");
 
 // Location parameters
 define("START_LAT",     "42.390185");
@@ -36,8 +36,9 @@ $demographic = array(
     'oth' => 'I am not with UMass'
 );
 
-// ShareThis publisher ID for social buttons
+// www.ShareThis.com publisher ID for social buttons
 define("ST_API",       "");
+
 
 /*
 

@@ -45,7 +45,7 @@ if ($db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS)) {
   </div>
   
   <p><br />
-   View as a <a href="map-admin.php">map</a> | Download entire data set: <a href="getkml.php" target="_blank">KML</a>
+   View as a <a href="map-admin.php">map</a> | Download entire data set: <a href="getkml.php" target="_blank">KML</a> or <a href="dbdump.php" target="_blank">SQL</a>
   </p>
       
       <div id="bottompanel">
