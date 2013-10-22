@@ -1,5 +1,5 @@
 body,input,select,textarea {margin:0;padding:0;font-family: 'OFL Sorts Mill Goudy TT', arial, sans-serif;font-size:18px;}
-body {background:#fafafa url(back.jpg) top center no-repeat; }
+body {background:#fafafa url(img/back.jpg) top center no-repeat; border-top:10px solid #881c1c;}
 h1,h2,p {margin:0;padding:0;}
 h1 {font-size:2.8em;color:#881c1c}
 h1 a {text-decoration:none;}

@@ -41,36 +41,7 @@ else {
   header('Location: map.php');
 };
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><?php echo APP_NAME; ?> - Report submission</title>
-    <?php include 'headerdata.php'; ?>
-    <meta name="robots" content="noindex,nofollow">
-  </head>
-  <body>
-
-    <!-- Begin UMass Amherst top banner -->
-    <div id="topbanner" style="text-align: right; padding-top: 8px; padding-right: 15px; padding-bottom: 8px; padding-left: 15px; background-color: rgb(136, 28, 28); ">
-      <div style="width:900px;margin:0 Auto;">
-       <a href="http://umass.edu/"><img id="banner_wordmark" src="http://umass.edu/umhome/identity/top_banner_06/informal_fff_on_881c1c.gif" width="146" height="22" alt="UMass Amherst" style="float: left; width: 146px; border: 0;"></a>
-      <form action="http://googlebox.oit.umass.edu/search" method="get" name="gs" onsubmit="if (this.q.value=='Search UMass Amherst') return false;" style="margin: 0; padding: 0">
-      <div><label for="q"><input type="text" style="font-size: 11px; font-family: Verdana, sans-serif; padding-left: 2px" size="22" name="q" id="q" value="Search UMass Amherst" onfocus="if (this.value=='Search UMass Amherst') this.value=''" onblur="if (this.value=='') this.value='Search UMass Amherst'"></label>
-      <input name="sa" type="submit" value="Go" style="font-size: 11px; font-family: Verdana, sans-serif;">
-      <input type="hidden" name="site" value="default_collection">
-      <input type="hidden" name="client" value="default_frontend">
-      <input type="hidden" name="proxystylesheet" value="default_frontend">
-      <input type="hidden" name="output" value="xml_no_dtd">
-      </div></form>
-      </div>
-    </div>
-    <!-- End UMass Amherst top banner -->
-
-    <div id="wrap">
-
-      <h1>
-        <a href="index.php"><?php echo APP_NAME; ?></a>
-      </h1>
+<?php get_header('Report submission'); ?>
 
       <p>
         Report this place as inappropriate:
@@ -119,9 +90,4 @@ else {
        };
       ?>
 
-    </div><!-- wrap -->
-
-    <?php include 'footer.php'; ?>
-
-  </body>
-</html>
+<?php get_footer(); ?>

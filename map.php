@@ -1,56 +1,35 @@
-<?php include_once 'config.php'; ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><?php echo APP_NAME; ?> - View submissions</title>
-    <?php include 'headerdata.php'; ?>
-    <meta name="robots" content="noindex,nofollow">
-    <script type="text/javascript">
-    
-    function initialize() {
+<?php include_once 'config.php'; get_header('View submissions'); ?>
 
-      var latLng = new google.maps.LatLng(42.390185,-72.528412);
-      var myOptions = {
-        zoom: 15,
-        center: latLng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
+      <script type="text/javascript">
 
-      var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+      // Initialize map when loaded
 
-      var TwitterLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>gettweetkml.php?v='+ Math.round(Math.random() * 10000000000));
-      TwitterLayer.setMap(map);
-      
-      var FavoritePlacesLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>getkml2.php?limit=500&v='+ Math.round(Math.random() * 10000000000));
-      FavoritePlacesLayer.setMap(map);
-      
-    };
-    
-    </script>
-  </head>
-  <body onload="initialize();">
-  
-    <!-- Begin UMass Amherst top banner -->
-    <div id="topbanner" style="text-align: right; padding-top: 8px; padding-right: 15px; padding-bottom: 8px; padding-left: 15px; background-color: rgb(136, 28, 28); ">
-      <div style="width:900px;margin:0 Auto;">
-       <a href="http://umass.edu/"><img id="banner_wordmark" src="http://umass.edu/umhome/identity/top_banner_06/informal_fff_on_881c1c.gif" width="146" height="22" alt="UMass Amherst" style="float: left; width: 146px; border: 0;"></a>
-      <form action="http://googlebox.oit.umass.edu/search" method="get" name="gs" onsubmit="if (this.q.value=='Search UMass Amherst') return false;" style="margin: 0; padding: 0">
-      <div><label for="q"><input type="text" style="font-size: 11px; font-family: Verdana, sans-serif; padding-left: 2px" size="22" name="q" id="q" value="Search UMass Amherst" onfocus="if (this.value=='Search UMass Amherst') this.value=''" onblur="if (this.value=='') this.value='Search UMass Amherst'"></label>
-      <input name="sa" type="submit" value="Go" style="font-size: 11px; font-family: Verdana, sans-serif;">
-      <input type="hidden" name="site" value="default_collection">
-      <input type="hidden" name="client" value="default_frontend">
-      <input type="hidden" name="proxystylesheet" value="default_frontend">
-      <input type="hidden" name="output" value="xml_no_dtd">
-      </div></form>
-      </div>
-    </div>
-    <!-- End UMass Amherst top banner -->
+      jQuery(document).ready(function($) {
 
-    <div id="wrap">
-    
-      <h1>
-        <a href="index.php"><?php echo APP_NAME; ?></a>
-      </h1>
+        // Set a default location
+        var start_lat = <?php echo START_LAT; ?>;
+        var start_lng = <?php echo START_LON; ?>;
+
+        var latLng = new google.maps.LatLng(start_lat,start_lng);
+        var myOptions = {
+          zoom: 15,
+          center: latLng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+
+        // Load Twitter layer
+        var TwitterLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>gettweetkml.php?v='+ Math.round(Math.random() * 10000000000));
+        TwitterLayer.setMap(map);
+
+        // Load KML layer
+        var FavoritePlacesLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>getkml.php?limit=500&v='+ Math.round(Math.random() * 10000000000));
+        FavoritePlacesLayer.setMap(map);
+
+      });
+
+      </script>
       
       <p>
        The pins below show the most recent 500 submissions. Click the pins to view comments.
@@ -66,12 +45,7 @@
       <div id="bottompanel">
         <input type="submit" class="button highlight" value="Submit a favorite place" onclick="window.location = 'submit.php';" />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <input type="submit" class="button" value="Visit UMass.edu" onclick="window.location = 'http://umass.edu';" />
+        <input type="submit" class="button" value="View home page" onclick="window.location = 'index.php';" />
       </div>
     
-    </div><!-- wrap -->
-
-    <?php include 'footer.php'; ?>
-    
-  </body>
-</html>
+<?php get_footer(); ?>

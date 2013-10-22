@@ -1,99 +1,69 @@
-<?php
+<?php include_once 'config.php'; get_header('Admin map'); ?>
 
-  include_once 'config.php';
-  
-  // Pass on parameters to KML
+      <?php
 
-  $whereclause = array();
-  if(isset($_GET['type']) && ($_GET['type'] != "")){
-    array_push($whereclause, "type=".$_GET['type']);
-  };
-  if(isset($_GET['gender']) && ($_GET['gender'] != "")){
-    array_push($whereclause, "gender=".$_GET['gender']);
-  };
-  if(isset($_GET['location']) && ($_GET['location'] != "")){
-    array_push($whereclause, "location=".$_GET['location']);
-  };
-  if(isset($_GET['limit']) && ($_GET['limit'] != "")){
-    array_push($whereclause, "limit=".$_GET['limit']);
-  };
-  
-  $parameters = "&".implode("&", $whereclause);
+        // Pass on GET parameters to KML
 
-?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><?php echo APP_NAME; ?> - Admin map</title>
-    <?php include 'headerdata.php'; ?>
-    <meta name="robots" content="noindex,nofollow">
-    <script type="text/javascript">
+        $whereclause = array();
+        if(isset($_GET['type']) && ($_GET['type'] != "")){
+          array_push($whereclause, "type=".$_GET['type']);
+        };
+        if(isset($_GET['gender']) && ($_GET['gender'] != "")){
+          array_push($whereclause, "gender=".$_GET['gender']);
+        };
+        if(isset($_GET['location']) && ($_GET['location'] != "")){
+          array_push($whereclause, "location=".$_GET['location']);
+        };
+        if(isset($_GET['limit']) && ($_GET['limit'] != "")){
+          array_push($whereclause, "limit=".$_GET['limit']);
+        };
 
-    function initialize() {
+        $parameters = "&".implode("&", $whereclause);
 
-      var latLng = new google.maps.LatLng(42.390185,-72.528412);
-      var myOptions = {
-        zoom: 16,
-        center: latLng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
+      ?>
 
-      var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+      <script type="text/javascript">
 
-      // map.addMapType(G_SATELLITE_3D_MAP);
-      
-<?php if(isset($_GET['heatmap'])) { ?>
+      jQuery(document).ready(function($) {
 
-      var imageBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(42.38,-72.54),
-      new google.maps.LatLng(42.40,-72.51));
-      
-      var heatmap = new google.maps.GroundOverlay(
-      "<?php echo APP_URL; ?>getheatmap.php",
-      imageBounds);
-      heatmap.setMap(map);
-      
-<?php }; ?>
+        // Initialize map
 
-      var ctaLayer = new google.maps.KmlLayer('http://umass.edu/myfavoriteplaces/getkml2.php?v='+ Math.round(Math.random() * 10000000000)+'<?php echo $parameters ?>');
-      ctaLayer.setMap(map);
-      
-    };
+        // Set a default location
+        var start_lat = <?php echo START_LAT; ?>;
+        var start_lng = <?php echo START_LON; ?>;
 
-    </script>
-  </head>
-  <body onload="initialize();">
+        var latLng = new google.maps.LatLng(start_lat,start_lng);
+        var myOptions = {
+          zoom: 16,
+          center: latLng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
 
-    <!-- Begin UMass Amherst top banner -->
-    <div id="topbanner" style="text-align: right; padding-top: 8px; padding-right: 15px; padding-bottom: 8px; padding-left: 15px; background-color: rgb(136, 28, 28); ">
-      <div style="width:900px;margin:0 Auto;">
-       <a href="http://umass.edu/"><img id="banner_wordmark" src="http://umass.edu/umhome/identity/top_banner_06/informal_fff_on_881c1c.gif" width="146" height="22" alt="UMass Amherst" style="float: left; width: 146px; border: 0;"></a>
-      <form action="http://googlebox.oit.umass.edu/search" method="get" name="gs" onsubmit="if (this.q.value=='Search UMass Amherst') return false;" style="margin: 0; padding: 0">
-      <div><label for="q"><input type="text" style="font-size: 11px; font-family: Verdana, sans-serif; padding-left: 2px" size="22" name="q" id="q" value="Search UMass Amherst" onfocus="if (this.value=='Search UMass Amherst') this.value=''" onblur="if (this.value=='') this.value='Search UMass Amherst'"></label>
-      <input name="sa" type="submit" value="Go" style="font-size: 11px; font-family: Verdana, sans-serif;">
-      <input type="hidden" name="site" value="default_collection">
-      <input type="hidden" name="client" value="default_frontend">
-      <input type="hidden" name="proxystylesheet" value="default_frontend">
-      <input type="hidden" name="output" value="xml_no_dtd">
-      </div></form>
-      </div>
-    </div>
-    <!-- End UMass Amherst top banner -->
+        var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
 
-    <div id="wrap">
+        <?php if(isset($_GET['heatmap'])) { ?>
 
-      <h1>
-        <a href="index.php"><?php echo APP_NAME; ?></a>
-      </h1>
-      
-      <style type="text/css">
-      <!--
-       #wrap p,option,select,input {font-size:0.9em;};
-      //-->
-      </style>
+          var imageBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(42.38,-72.54),
+          new google.maps.LatLng(42.40,-72.51));
 
-      <p>
-       This is what has been submitted so far. Filter by:<br />
+          var heatmap = new google.maps.GroundOverlay(
+          "<?php echo APP_URL; ?>getheatmap.php",
+          imageBounds);
+          heatmap.setMap(map);
+
+        <?php }; ?>
+
+        // Add KML data
+
+        var ctaLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>getkml.php?v='+ Math.round(Math.random() * 10000000000)+'<?php echo $parameters ?>');
+        ctaLayer.setMap(map);
+
+      });
+
+      </script>
+
+      <p>This is what has been submitted so far. Filter by:<br />
        
        <form action="" id="filter_form" method="get" name="filter_form">
          <select id="type" name="type">
@@ -152,19 +122,13 @@
       <div id="mapCanvas" style="width:100%;height:500px;">Loading map... be patient...</div>
       
       <p><br />
-       View as a <a href="list-admin.php">table</a> | Download entire data set: <a href="getkml2.php" target="_blank">KML</a> |
-       View <a href="http://statcounter.com/project/standard/stats.php?project_id=6368502&guest=1" target="_blank">Website Stats</a>
+       View as a <a href="list-admin.php">table</a> | Download entire data set: <a href="getkml.php" target="_blank">KML</a>
       </p>
 
       <div id="bottompanel">
         <input type="submit" value="&nbsp;&nbsp;Submit a favorite place&nbsp;&nbsp;" onclick="window.location = 'submit.php';" />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <input type="submit" value="&nbsp;&nbsp;Visit UMass.edu&nbsp;&nbsp;" onclick="window.location = 'http://umass.edu';" />
+        <input type="submit" class="button" value="View home page" onclick="window.location = 'index.php';" />
       </div>
 
-    </div><!-- wrap -->
-
-    <?php include 'footer.php'; ?>
-
-  </body>
-</html>
+<?php get_footer(); ?>

@@ -11,8 +11,8 @@ $max_lng = -72.51;
 
 $img =  imagecreatetruecolor( $img_width, $img_height );
 imagesavealpha($img, true);
-$pallette = imagecreatefromgif('pallette2.gif');
-$dot = imagecreatefrompng('dot60b.png');
+$pallette = imagecreatefromgif('img/pallette2.gif');
+$dot = imagecreatefrompng('img/dot60b.png');
 
 $bg = imagecolorallocate ( $img, 0,0,0 );
 imagesetbrush($img, $dot);
