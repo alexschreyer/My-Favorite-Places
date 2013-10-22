@@ -13,11 +13,11 @@ License: GPL (http://www.gnu.org/licenses/gpl.html)
 
 Author: Alexander Schreyer, www.alexschreyer.net, mail@alexschreyer.net
 
-Website: http://umass.edu/myfavoriteplaces
-
 Description: A PHP/MySQL-based web app that lets visitors vote for their favorite
 places by putting pins on a map. The votes can include comments and the results
 can be plotted as a heatmap.
+
+Website: http://www.alexschreyer.net/projects/finding-our-favorite-places/
 
 Features:
 - Google Maps API-based location survey
@@ -64,4 +64,4 @@ Version 2.0 (10/21/2013):
 - Took out UMass references.
 
 Version 1.0:
-- Initial release on www.umass.edu/myfavortiteplaces
+- Initial release on http://www.umass.edu/myfavoriteplaces
