@@ -61,8 +61,13 @@ get_header('A favorite place');
       
       <p>
         <br />Share this place:<br />
-         <?php $sharemessage = htmlspecialchars("\"".$row->description."\"", ENT_QUOTES).' says '.(($row->name!='') ? $row->name : 'Anonymous'); ?>
-        <span  class='st_twitter_large' displayText='Tweet' st_title='<?php echo $sharemessage.' #UMassAmherst - '; ?>'></span><span  class='st_facebook_large' displayText='Facebook' st_title='<?php echo $sharemessage; ?>'></span><span  class='st_yahoo_large' displayText='Yahoo!' st_title='<?php echo $sharemessage; ?>'></span><span  class='st_gbuzz_large' displayText='Google Buzz' st_title='<?php echo $sharemessage; ?>'></span><span  class='st_email_large' displayText='Email'></span><span  class='st_sharethis_large' displayText='ShareThis' st_title='<?php echo $sharemessage.' #UMassAmherst '; ?>'></span>
+        <?php $sharemessage = htmlspecialchars("\"".$row->description."\"", ENT_QUOTES).' says '.(($row->name!='') ? $row->name : 'Anonymous'); ?>
+        <span class='st_sharethis_large' displayText='ShareThis' st_title='<?php echo $sharemessage; ?>'></span>
+        <span class='st_facebook_large' displayText='Facebook' st_title='<?php echo $sharemessage; ?>'></span>
+        <span class='st_twitter_large' displayText='Tweet' st_title='<?php echo $sharemessage; ?>'></span>
+        <span class='st_linkedin_large' displayText='LinkedIn' st_title='<?php echo $sharemessage; ?>'></span>
+        <span class='st_pinterest_large' displayText='Pinterest' st_title='<?php echo $sharemessage; ?>'></span>
+        <span class='st_email_large' displayText='Email' st_title='<?php echo $sharemessage; ?>'></span>
       </p>
 
       <div id="bottompanel">

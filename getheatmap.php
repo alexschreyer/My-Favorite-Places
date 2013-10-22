@@ -2,12 +2,12 @@
 
 include_once 'config.php';
 
-$img_width = 1000;
-$img_height = 1000;
-$min_lat = 42.38;
-$max_lat = 42.40;
-$min_lng = -72.54;
-$max_lng = -72.51;
+$img_width = HEATMAP_RES;
+$img_height = HEATMAP_RES;
+$min_lat = START_LAT-0.01;
+$max_lat = START_LAT+0.01;
+$min_lng = START_LON-0.01;
+$max_lng = START_LON+0.01;
 
 $img =  imagecreatetruecolor( $img_width, $img_height );
 imagesavealpha($img, true);

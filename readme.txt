@@ -21,24 +21,26 @@ can be plotted as a heatmap.
 
 Features:
 - Google Maps API-based location survey
-- Demographic data in survey
+- Ability to include emographic data in survey
 - Location-based pin preset if close to default location
 - Display of most recent submissions
 - Display of tweets geotagged in area
-- Responsive mobile website
-- Hidden admin area
+- Responsive mobile website/web app
+- Hidden admin area (not password protected!)
 - Data filtering in admin area
 - Heatmap plot in admin area
 - Database backup and KML download feature
 
 Setup: Publish to web and set up MySQL database using config.sql file. Then adjust
-config.php file's contents to your liking. Don't forget to adjust the survey options on 
-the submit.php page. If you add/remove any, adjust the db as well. 
+config.php file's contents to your liking.
 
-For admin view, go to map-admin.php. You can back the DB up using dbdump.php.
+Usage: For admin view, go to map-admin.php. You can back the DB up using dbdump.php. Please
+note: The KML data can only be viewed when this code is hosted on a public server (not on a local
+testing server).
 
 Todo:
 - Twitter feeds are not working because of new auth model.
+- Should update Google Maps API to newest version.
 - Heatmap should be filtered as well.
 - Can heatmap graphics be smoother?
 
@@ -49,7 +51,7 @@ Version 2.0 (10/21/2013):
 - Set up default center location in config file.
 - Moved all images and INCs to subfolder.
 - Bad words filtering now for names and descriptions.
-- Took out UMass references
+- Took out UMass references.
 
 Version 1.0:
-- Initial release on umass.edu/myfavortiteplaces
+- Initial release on www.umass.edu/myfavortiteplaces

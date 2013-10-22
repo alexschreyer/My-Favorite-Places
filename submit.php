@@ -153,29 +153,16 @@
           </p><input type="text" id="name" maxlength="32" name="name" />
 
           <p>
-            I am a UMass:
+            I am a:
           </p><select id="type" name="type">
             <option value="" disabled="disabled" selected="selected">
               Please select...
             </option>
-            <option value="und">
-              Undergraduate Student
-            </option>
-            <option value="gra">
-              Graduate Student
-            </option>
-            <option value="alu">
-              Alumnus
-            </option>
-            <option value="fac">
-              Faculty
-            </option>
-            <option value="emp">
-              Employee
-            </option>
-            <option value="oth">
-              I am not with UMass
-            </option>
+            <?php while (list($val,$txt) = each($demographic)) { ?>
+              <option value="<?php echo $val ?>">
+                <?php echo $txt ?>
+              </option>
+            <?php }; ?>
           </select>
           <p>
             And I am:

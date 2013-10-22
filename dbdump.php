@@ -3,7 +3,7 @@
 include_once 'config.php';
 
 // Set the output file
-$filename = date('Y-m-d').'-umassplaces.sql.gz';
+$filename = date('Y-m-d').'-backup.sql.gz';
 $path = rtrim(getenv('SCRIPT_FILENAME'),'dbdump.php').'data/';
 $location = $path.$filename;
 

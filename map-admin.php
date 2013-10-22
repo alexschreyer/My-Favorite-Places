@@ -44,8 +44,8 @@
         <?php if(isset($_GET['heatmap'])) { ?>
 
           var imageBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(42.38,-72.54),
-          new google.maps.LatLng(42.40,-72.51));
+          new google.maps.LatLng(start_lat-0.01,start_lng-0.01),
+          new google.maps.LatLng(start_lat+0.01,start_lng+0.01));
 
           var heatmap = new google.maps.GroundOverlay(
           "<?php echo APP_URL; ?>getheatmap.php",
@@ -55,8 +55,8 @@
         <?php }; ?>
 
         // Add KML data
-
-        var ctaLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>getkml.php?v='+ Math.round(Math.random() * 10000000000)+'<?php echo $parameters ?>');
+        var url = '<?php echo APP_URL; ?>getkml.php?v='+ Math.round(Math.random() * 10000000000)+'<?php echo $parameters ?>';
+        var ctaLayer = new google.maps.KmlLayer(url);
         ctaLayer.setMap(map);
 
       });
@@ -70,24 +70,11 @@
             <option value="" <?php if (!isset($_GET['type']) or $_GET['type']=='') echo "selected='selected'"; ?>>
               Anybody
             </option>
-            <option value="und" <?php if (isset($_GET['type']) and $_GET['type']=='und') echo "selected='selected'"; ?>>
-              Undergraduate Student
-            </option>
-            <option value="gra" <?php if (isset($_GET['type']) and $_GET['type']=='gra') echo "selected='selected'"; ?>>
-              Graduate Student
-            </option>
-            <option value="alu" <?php if (isset($_GET['type']) and $_GET['type']=='alu') echo "selected='selected'"; ?>>
-              Alumnus
-            </option>
-            <option value="fac" <?php if (isset($_GET['type']) and $_GET['type']=='fac') echo "selected='selected'"; ?>>
-              Faculty
-            </option>
-            <option value="emp" <?php if (isset($_GET['type']) and $_GET['type']=='emp') echo "selected='selected'"; ?>>
-              Employee
-            </option>
-            <option value="oth" <?php if (isset($_GET['type']) and $_GET['type']=='oth') echo "selected='selected'"; ?>>
-              I am not with UMass
-            </option>
+            <?php while (list($val,$txt) = each($demographic)) { ?>
+              <option value="<?php echo $val ?>" <?php if (isset($_GET['type']) and $_GET['type']==$val) echo "selected='selected'"; ?>>
+                <?php echo $txt ?>
+              </option>
+            <?php }; ?>
           </select>
           <select id="gender" name="gender">
             <option value="" <?php if (!isset($_GET['gender']) or $_GET['gender']=='') echo "selected='selected'"; ?>>
