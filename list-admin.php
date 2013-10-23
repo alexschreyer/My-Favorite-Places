@@ -51,7 +51,7 @@ if ($db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS)) {
       <div id="bottompanel">
         <input type="submit" value="&nbsp;&nbsp;Submit a favorite place&nbsp;&nbsp;" onclick="window.location = 'submit.php';" />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <input type="submit" class="button" value="View home page" onclick="window.location = 'index.php';" />
+        <input type="submit" class="button" value="<?php echo OUT_NAME ?>" onclick="window.location = '<?php echo OUT_URL ?>';" />
       </div>
     
 <?php get_footer(); ?>

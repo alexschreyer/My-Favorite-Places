@@ -4,17 +4,17 @@ include_once 'config.php';
 
 header("Content-type: application/xml");
 
-printf("<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<kml xmlns=\"http://earth.google.com/kml/2.0\">
+printf("<?xml version='1.0' encoding='UTF-8'?>\n\r");
+printf("<kml xmlns='http://earth.google.com/kml/2.0'>
 <Document>
 <Style id='commentsIcon'>
 <IconStyle>
 <Icon>
-<href>http://www.umass.edu/myfavoriteplaces/img/speak_b.png</href>
+<href>".APP_URL."img/marker.png</href>
 </Icon>
 </IconStyle>
 </Style>
-<LookAt><latitude>42.390185</latitude><longitude>-72.528412</longitude><range>1200</range><tilt>0</tilt><heading>0</heading></LookAt>
+<LookAt><latitude>".START_LAT."</latitude><longitude>".START_LON."</longitude><range>1200</range><tilt>0</tilt><heading>0</heading></LookAt>
 ");
 
 if ($db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS)) {

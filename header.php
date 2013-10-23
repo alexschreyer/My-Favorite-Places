@@ -21,7 +21,7 @@
     <script type="text/javascript">
       google.load("jquery", "1.6.2");
     </script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<?php echo G_API; ?>&v=3.exp&sensor=true&libraries=visualization"></script>
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher: "<?php echo ST_API; ?>", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>

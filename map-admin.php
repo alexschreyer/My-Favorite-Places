@@ -1,67 +1,118 @@
 <?php include_once 'config.php'; get_header('Admin map'); ?>
 
-      <?php
+<script type="text/javascript">
 
-        // Pass on GET parameters to KML
+var myData = [
 
-        $whereclause = array();
-        if(isset($_GET['type']) && ($_GET['type'] != "")){
-          array_push($whereclause, "type=".$_GET['type']);
-        };
-        if(isset($_GET['gender']) && ($_GET['gender'] != "")){
-          array_push($whereclause, "gender=".$_GET['gender']);
-        };
-        if(isset($_GET['location']) && ($_GET['location'] != "")){
-          array_push($whereclause, "location=".$_GET['location']);
-        };
-        if(isset($_GET['limit']) && ($_GET['limit'] != "")){
-          array_push($whereclause, "limit=".$_GET['limit']);
-        };
+<?php
 
-        $parameters = "&".implode("&", $whereclause);
+  // Assemble GET parameters for KML and DB request
+  $whereclause = array();
+  if(isset($_GET['type']) && ($_GET['type'] != "")){
+    array_push($whereclause, "type='".$_GET['type']."'");
+  };
+  if(isset($_GET['gender']) && ($_GET['gender'] != "")){
+    array_push($whereclause, "gender='".$_GET['gender']."'");
+  };
+  if(isset($_GET['location']) && ($_GET['location'] != "")){
+    array_push($whereclause, "location='".$_GET['location']."'");
+  };
+  if(isset($_GET['limit']) && ($_GET['limit'] != "")){
+    array_push($whereclause, "limit='".$_GET['limit']."'");
+  };
+  $parameters = "&".implode("&", $whereclause);
 
-      ?>
 
-      <script type="text/javascript">
+  // Get data from DB directly for heatmap
+  if ($db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS)) {
 
-      jQuery(document).ready(function($) {
+    mysqli_select_db($db, DB_NAME);
 
-        // Initialize map
+    // Assemble query from form fields via GET
+    $query = "SELECT * FROM submissions";
+    if ($_GET) {
+      $query .= (count($whereclause) > 0 ? (count($whereclause) > 1 ? " WHERE ".implode(" AND ", $whereclause) : " WHERE ".implode(" ", $whereclause)) : "");
+    };
+    $query .= " ORDER BY id DESC";
+    if(isset($_GET['limit']) && ($_GET['limit'] != "")){
+      $query .= " LIMIT " . $_GET['limit'];
+    };
 
-        // Set a default location
-        var start_lat = <?php echo START_LAT; ?>;
-        var start_lng = <?php echo START_LON; ?>;
+    // echo $query;
 
-        var latLng = new google.maps.LatLng(start_lat,start_lng);
-        var myOptions = {
-          zoom: 16,
-          center: latLng,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+    $points = array();
 
-        var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+    if ($result = mysqli_query($db, $query)) {
 
-        <?php if(isset($_GET['heatmap'])) { ?>
+      while ($row = mysqli_fetch_object($result)) {
 
-          var imageBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(start_lat-0.01,start_lng-0.01),
-          new google.maps.LatLng(start_lat+0.01,start_lng+0.01));
+        if ($row->name == '') $row->name = 'Anonymous';
+        $points[] = array(
+             'id' => $row->id,
+             'name' => $row->name,
+             'description' => $row->description,
+             'lat' => $row->lat,
+             'lng' => $row->lng
+        );
+        // Echo points: ?>
+        new google.maps.LatLng(<?php echo $row->lat ?>, <?php echo $row->lng ?>),
+        <?php
+      };
 
-          var heatmap = new google.maps.GroundOverlay(
-          "<?php echo APP_URL; ?>getheatmap.php",
-          imageBounds);
-          heatmap.setMap(map);
+    };
 
-        <?php }; ?>
+    mysqli_close($db);
 
-        // Add KML data
-        var url = '<?php echo APP_URL; ?>getkml.php?v='+ Math.round(Math.random() * 10000000000)+'<?php echo $parameters ?>';
-        var ctaLayer = new google.maps.KmlLayer(url);
-        ctaLayer.setMap(map);
+  };
 
-      });
 
-      </script>
+?>
+
+];
+
+jQuery(document).ready(function($) {
+
+  // Initialize map
+
+  // Set a default location
+  var start_lat = <?php echo START_LAT; ?>;
+  var start_lng = <?php echo START_LON; ?>;
+
+  var latLng = new google.maps.LatLng(start_lat,start_lng);
+  var myOptions = {
+    zoom: 16,
+    center: latLng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+
+  var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+
+  // Show heatmap only if no KML is shown
+
+  <?php if(isset($_GET['heatmap'])) { ?>
+
+  // Add heatmap data
+    var pointArray = new google.maps.MVCArray(myData);
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: pointArray,
+      radius: 50
+    });
+
+    heatmap.setMap(map);
+
+  <?php } else  { ?>
+
+    // Add KML data
+    var url = "<?php echo APP_URL; ?>getkml.php?v="+ Math.round(Math.random() * 10000000000)+"<?php echo $parameters ?>";
+    var ctaLayer = new google.maps.KmlLayer(url);
+
+    ctaLayer.setMap(map);
+
+  <?php }; ?>
+
+});
+
+</script>
 
       <p>This is what has been submitted so far. Filter by:<br />
        
@@ -101,7 +152,7 @@
               Indoors
             </option>
           </select>
-          <input type="checkbox" id="heatmap" name="heatmap" <?php if (isset($_GET['heatmap']) and $_GET['heatmap']=='hea') echo "checked='checked'"; ?> value="hea" />&nbsp;<span style="font-size:0.8em;">Show heatmap (full data)</span>
+          <input type="checkbox" id="heatmap" name="heatmap" <?php if (isset($_GET['heatmap']) and $_GET['heatmap']=='hea') echo "checked='checked'"; ?> value="hea" />&nbsp;Heatmap
           <input type="submit" value=" Update Map " />
        </form>
       </p>
@@ -115,7 +166,7 @@
       <div id="bottompanel">
         <input type="submit" value="&nbsp;&nbsp;Submit a favorite place&nbsp;&nbsp;" onclick="window.location = 'submit.php';" />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <input type="submit" class="button" value="View home page" onclick="window.location = 'index.php';" />
+        <input type="submit" class="button" value="<?php echo OUT_NAME ?>" onclick="window.location = '<?php echo OUT_URL ?>';" />
       </div>
 
 <?php get_footer(); ?>

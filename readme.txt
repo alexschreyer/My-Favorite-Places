@@ -1,7 +1,7 @@
 My Favorite Places web app
 ==========================
 
-Version: 2.1
+Version: 2.2
 
 Copyright 2010-2013, Alexander C. Schreyer, All rights reserved
 
@@ -45,11 +45,14 @@ testing server).
 Todo:
 - Use prepared MySQLi statements for process.php.
 - Twitter feeds are not working because of new auth model.
-- Should update Google Maps API to newest version.
-- Heatmap should be filtered as well.
-- Can heatmap graphics be smoother?
 
 History:
+
+Version 2.2 (10/23/2013):
+- Switched to v. 3.exp of Maps API
+- Uses Googles heatmap implementation now
+- Heatmap now shows filtered data
+- Fixed minor bugs
 
 Version 2.1 (10/22/2013):
 - Minor security improvements

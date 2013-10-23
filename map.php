@@ -19,13 +19,13 @@
 
         var map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
 
-        // Load Twitter layer
-        var TwitterLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>gettweetkml.php?v='+ Math.round(Math.random() * 10000000000));
-        TwitterLayer.setMap(map);
-
         // Load KML layer
         var FavoritePlacesLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>getkml.php?limit=500&v='+ Math.round(Math.random() * 10000000000));
         FavoritePlacesLayer.setMap(map);
+
+        // Load Twitter layer
+        var TwitterLayer = new google.maps.KmlLayer('<?php echo APP_URL; ?>gettweetkml.php?v='+ Math.round(Math.random() * 10000000000));
+        TwitterLayer.setMap(map);
 
       });
 
@@ -50,7 +50,7 @@
       <div id="bottompanel">
         <input type="submit" class="button highlight" value="Submit a favorite place" onclick="window.location = 'submit.php';" />
         &nbsp;&nbsp;or&nbsp;&nbsp;
-        <input type="submit" class="button" value="View home page" onclick="window.location = 'index.php';" />
+        <input type="submit" class="button" value="<?php echo OUT_NAME ?>" onclick="window.location = '<?php echo OUT_URL ?>';" />
       </div>
     
 <?php get_footer(); ?>

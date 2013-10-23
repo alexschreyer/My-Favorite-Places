@@ -12,6 +12,10 @@ define("APP_DESC",      "A description goes here for the meta tag and for the ho
 define("ADMIN_EMAILS",  "me@here.com");
 define("APP_URL",       "http://localhost/My-Favorite-Places/");
 
+// Outbound button link - This appears on map pages
+define("OUT_NAME",      "View home page");
+define("OUT_URL",       "index.php");
+
 // Location parameters
 define("START_LAT",     "42.390185");
 define("START_LON",     "-72.528412");
@@ -22,6 +26,14 @@ define("DB_SERVER",     "localhost");
 define("DB_USER",       "root");
 define("DB_PASS",       "");
 define("DB_NAME",       "myfavoriteplaces");
+
+// ShareThis publisher ID for social buttons
+// Details: http://www.sharethis.com/#sthash.SQGYVVqA.dpbs
+define("ST_API",        "");
+
+// Google Maps API Key - needed if you get lots of use
+// Details: https://developers.google.com/maps/documentation/javascript/tutorial
+define("G_API",         "");
 
 // Some spam protection, these will be replaced - case insensitive
 $badwords = array("shit" , "fuck" , "cunt", "insert" , "delete", "update", "drop");
@@ -35,9 +47,6 @@ $demographic = array(
     'emp' => 'Employee',
     'oth' => 'I am not with UMass'
 );
-
-// www.ShareThis.com publisher ID for social buttons
-define("ST_API",       "");
 
 
 /*
@@ -55,5 +64,6 @@ function get_footer()
 { // BEGIN function get_header
     include 'footer.php';
 } // END function get_header
+
 
 ?>

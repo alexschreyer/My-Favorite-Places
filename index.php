@@ -2,7 +2,7 @@
 
 <!-- BEGIN page content -->
 
-<img src="img/image_01.jpg" width="100%">
+<img src="img/home.jpg" width="100%">
 
 <!-- BEGIN slideshow -->
 
