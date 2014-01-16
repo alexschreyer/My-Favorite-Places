@@ -36,7 +36,22 @@ define("ST_API",        "");
 define("G_API",         "");
 
 // Some spam protection, these will be replaced - case insensitive
-$badwords = array("shit" , "fuck" , "cunt", "insert" , "delete", "update", "drop");
+$badwords = array("shit" , "fuck" , "cunt");
+
+// If any of these words is submitted, the submission is ignored - case insensitive
+$blockwords = array(
+	"href",
+	"javascript",
+	"insert",
+	"delete",
+	"update",
+	"drop");
+
+// Spam IP list, not used for now
+$badips = array(
+	"188.143.232.61",
+	"91.236.74.123",
+	"188.143.232.120");
 
 // Options for the demographic dropdown
 $demographic = array(
@@ -45,7 +60,7 @@ $demographic = array(
     'alu' => 'Alumnus',
     'fac' => 'Faculty',
     'emp' => 'Employee',
-    'oth' => 'I am not with UMass'
+    'oth' => 'Other'
 );
 
 
