@@ -19,7 +19,7 @@ if (isset($_POST['submit']) and ($_SERVER['HTTP_REFERER'] == APP_URL.'submit.php
     //  if (strpos($_SERVER['REMOTE_ADDR'],'128.119') !== false) or (strpos($_SERVER['REMOTE_ADDR'],'72.19') !== false) {
 
     // Don't execute if a blockword has been found
-    if (strposa($_POST['description'],$blockwords) == false) {
+    if (strposa($_POST['description'] , $blockwords) == false) {
 
       if ($db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS)) {
 
@@ -49,16 +49,18 @@ if (isset($_POST['submit']) and ($_SERVER['HTTP_REFERER'] == APP_URL.'submit.php
         mysqli_close($db);
 
       };
+      // Now show the new point
       header('Location: map-single.php?p='.$last_id);
 
   	} else {
-  		echo 'This submission is not allowed. Something triggered our spam protection. Please go back and resubmit.';
-  	};
+
+      // The submission included blockwords
+  		echo ERROR_SPAM;
+
+    };
 
     //  };
   
 };
-
-
 
 ?>
