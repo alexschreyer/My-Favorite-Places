@@ -47,10 +47,14 @@ define("G_API",         "");
 define("ERROR_SPAM" , 'This submission is not allowed. Something triggered our spam protection. Please go back and resubmit.');
 
 // Some spam protection, these will be replaced with **** - case insensitive
-$badwords = array("shit" , "fuck" , "cunt");
+$badwords = array(
+  "shit",
+  "fuck",
+  "cunt");
 
 // If any of these words are submitted, the submission is blocked - case insensitive
 $blockwords = array(
+	"http",
 	"href",
 	"javascript",
 	"insert",
